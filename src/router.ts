@@ -12,7 +12,7 @@ const routes = [
     component: initstep1,
   },
   {
-    path: /\//,
+    path: /\/welcome/,
     component: initPageWelcome,
   },
 ];
@@ -27,7 +27,7 @@ export function initRouter(conteiner: Element) {
 
     for (const r of routes) {
       if (r.path.test(route)) {
-        const el = r.component({ goTo: goTo });
+        const el = r.component({ goTo });
         if (conteiner.firstChild) {
           conteiner.firstChild.remove();
         }

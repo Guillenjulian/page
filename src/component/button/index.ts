@@ -27,7 +27,7 @@ export function initButon() {
       .button{
           font-size:18px;
           padding: 17px 13px;
-          margin-top: 3px;
+          margin: 18px;
           border-radius: 4px;
           background-color : #9CBBE9;
           

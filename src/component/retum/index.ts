@@ -16,7 +16,7 @@ export function initRetum() {
       div.innerHTML = `
        
           <div class = "div"> 
-          <a class = "a" href="/${label}">${label}</a>
+          <a class = "a" href="/">${label}</a>
         </div>
        
         `;
@@ -34,12 +34,15 @@ export function initRetum() {
          font-size: 22px;
          padding: 17px 13px;
          border :3px solid black;
-         border-radius 4px
-         margin-top: 3px;
+         border-radius 4px;
+         margin: 18px;
         }
         .a{
           text-decoration: none;
           text-align: center;
+          color:black;
+          font-size: 18px;
+          font-weight: 500;
         }
     
         `;

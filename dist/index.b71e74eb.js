@@ -539,33 +539,24 @@ var _subtitulo = require("./component/subtitulo");
 var _button = require("./component/button");
 var _footer = require("./component/footer");
 var _input = require("./component/input");
+var _selector = require("./component/selector");
+var _retum = require("./component/retum");
 var _router = require("./router");
-var _welcome = require("./pages/welcome");
 (function main() {
     const root = document.querySelector(".root");
-    const params = location.pathname;
-    //console.log(params);
-    (0, _welcome.initPageWelcome)(params);
-    //console.log(params, " este es el main");
-    // if (location.pathname == "/welcome") {
-    // }
-    // if (location.pathname == "/step-1") {
-    //   initstep1(params);
-    // }
-    // if (location.pathname == "/thankyou") {
-    //   initthankyou(params);
-    // }
+    (0, _retum.initRetum)();
     (0, _header.initHeader)();
     (0, _titel.initTitle)();
     (0, _text.initText)();
     (0, _subtitulo.initSubtitel)();
+    (0, _selector.initSelector)();
     (0, _input.initinput)();
     (0, _button.initButon)();
     (0, _footer.initFooter)();
     (0, _router.initRouter)(root);
 })();
 
-},{"./router":"4QFWt","./pages/welcome":"fNSF3","./component/header":"bsv6P","./component/titel":"8pt65","./component/text":"iR2MB","./component/subtitulo":"NrAkm","./component/button":"amqKA","./component/footer":"aQVyk","./component/input":"aliaB"}],"4QFWt":[function(require,module,exports) {
+},{"./router":"4QFWt","./component/header":"bsv6P","./component/titel":"8pt65","./component/text":"iR2MB","./component/subtitulo":"NrAkm","./component/button":"amqKA","./component/footer":"aQVyk","./component/input":"aliaB","./component/selector":"knZDI","./component/retum":"hZ1Co"}],"4QFWt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter);
@@ -582,7 +573,7 @@ const routes = [
         component: (0, _step1.initstep1)
     },
     {
-        path: /\//,
+        path: /\/welcome/,
         component: (0, _welcome.initPageWelcome)
     }
 ];
@@ -595,7 +586,7 @@ function initRouter(conteiner) {
         console.log("en el HandelRoute" + route);
         for (const r of routes)if (r.path.test(route)) {
             const el = r.component({
-                goTo: goTo
+                goTo
             });
             if (conteiner.firstChild) conteiner.firstChild.remove();
             conteiner.appendChild(el);
@@ -608,7 +599,56 @@ function initRouter(conteiner) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./pages/welcome":"fNSF3","./pages/step-1":"fHRFq","./pages/thankyou":"ay1CF"}],"gkKU3":[function(require,module,exports) {
+},{"./pages/thankyou":"ay1CF","./pages/step-1":"fHRFq","./pages/welcome":"fNSF3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ay1CF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initthankyou", ()=>initthankyou);
+function initthankyou(params) {
+    const div = document.createElement("div");
+    const style = document.createElement("style");
+    div.innerHTML = `
+  <div class="body">
+  <header-element></header-element> 
+  <div class="container">
+
+  <title-field class="title-field" label="Gracias"></title-field>
+
+  <subtitle-field class="subtitle-field" label="Toda la información que nos brindaste es muy importante"></subtitle-field>
+
+      
+
+  <custon-button class="custon-button" label =" De nada"></custon-button>
+  
+  </div>
+  <footer-element></footer-element>
+  </div>
+
+        `;
+    style.innerHTML = `
+.body {  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+  .container{
+    display: flex;
+    flex-direction: column;  
+    gap:25px;
+    margin-bottom:150px; 
+  }
+    
+            `;
+    div.append(style);
+    const buttonEL = div.querySelector(".custon-button ");
+    buttonEL.addEventListener("click", ()=>{
+        params.goTo("/welcome");
+    });
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -638,7 +678,67 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"fNSF3":[function(require,module,exports) {
+},{}],"fHRFq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initstep1", ()=>initstep1);
+function initstep1(params) {
+    const div = document.createElement("div");
+    const style = document.createElement("style");
+    div.innerHTML = `
+  <div class="body">
+
+  <header-element></header-element> 
+
+  <div class="container">
+
+  <title-field label="Necesitamos algunos datos más"></title-field>
+
+
+
+<div>
+<input-field label = "Email" id="email"></input>
+</div>
+
+<div>
+<input-field label = "Comida favorita" id="text"></input>
+</div>
+
+  <custon-select label="Alguna de estas tres opciones"></custon-select>
+
+<custon-button  class= "custon-button " label="Comenzar"></custon-button>
+
+<componet-href class"a"  label= "volver"></componet-href>
+
+</div>
+
+ <footer-element></footer-element>
+       </div>
+           `;
+    style.innerHTML = `
+  .body {  display: flex;
+    flex-direction: column;
+  
+  }
+  
+  
+  
+    .container{
+      display: flex;
+      flex-direction: column;  
+      gap:25px;
+      margin-bottom:150px; 
+    }
+      
+              `;
+    div.append(style);
+    const buttonEL = div.querySelector(".custon-button ");
+    // console.log(" este es el boton  del welcome", buttonEL);
+    buttonEL.addEventListener("click", ()=>params.goTo("./thankyou"));
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fNSF3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initPageWelcome", ()=>initPageWelcome);
@@ -646,9 +746,11 @@ function initPageWelcome(params) {
     const div = document.createElement("div");
     const style = document.createElement("style");
     div.innerHTML = `
-  
+  <div class="body">
+
     <header-element></header-element> 
-<div class =" text">
+    <div class="container">
+
 <title-field label="Te damos la bienvenida a esta página"></title-field>
 
 <text-custon label="Lorem ipsum dolor sit amet 
@@ -656,63 +758,40 @@ consectetur adipisicing elit. Veniam consequuntur iure voluptas
 quia accusantium voluptatum aspernatur provident el repudiandae 
 quam veritatis, libero porro sit beatae laboriosam a aut consequatur quidem?">
 </text-custon>
-<subtitle-field label ="Para continuar ingresá tu nombre"></subtitle>
 
+
+<div>
+<subtitle-field label ="Para continuar ingresá tu nombre"></subtitle>
 </div>
- <section class="container">
- <div class ="container__input">
- <input-field label = "Nombre" id="text"></input>
- </div>
- <div class ="container__button">
- <custon-button  class ="button" label ="Comenzar"> Comenzar</custon-button>
- </div>
- </section>
+
+<div>
+<input-field label = "Nombre" id="text"></input>
+</div>
+
+<custon-button  class= "custon-button " label="Comenzar"></custon-button>
+</div>
 
  <footer-element></footer-element>
+ </div>
 
  `;
-    const buttonEL = document.querySelector(".container__button");
-    console.log(" este es el boton", buttonEL);
-    // buttonEL.addEventListener("click", function () {
-    //params.goTo("/step-1");
-    //   console.log("click");
-    //  });
-    // console.log(" este es el  welcome", div);
-    return div;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fHRFq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initstep1", ()=>initstep1);
-function initstep1(params) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-         <h1> Pagina 2 </h1>
-       
-           `;
-    div.addEventListener("click", ()=>{
-        params.goTo("/thankyou");
-    });
-    return div;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ay1CF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initthankyou", ()=>initthankyou);
-function initthankyou(params) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-  <header-element></header-element> 
-
-       <h1> thankyou </h1>
- <footer-element></footer-element>
-     
-         `;
-    div.addEventListener("click", ()=>{
-        params.goTo("/welcome");
-    });
+    const buttonEL = div.querySelector(".custon-button ");
+    // console.log(" este es el boton  del welcome", buttonEL);
+    buttonEL.addEventListener("click", ()=>params.goTo("./step-1"));
+    style.innerHTML = `
+  .body {  display: flex;
+    flex-direction: column;
+  
+  }
+    .container{
+      display: flex;
+      flex-direction: column;  
+      gap:25px;
+      margin-bottom:1px; 
+    }
+      
+              `;
+    div.append(style);
     return div;
 }
 
@@ -893,7 +972,7 @@ function initButon() {
       .button{
           font-size:18px;
           padding: 17px 13px;
-          margin-top: 3px;
+          margin: 18px;
           border-radius: 4px;
           background-color : #9CBBE9;
           
@@ -949,9 +1028,9 @@ function initinput() {
             const style = document.createElement("style");
             div.classList.add("root");
             div.innerHTML = `
+      <label class=" label">${label}</label>
      
-        <label class=" label">${label}</label>
-        <input class="input" type="${this.id}" placeholder=" ingresa tu ${label}"/>
+     <input class="input" type="${this.id}" placeholder=" ingresa tu ${label}"/>
      
       `;
             style.innerHTML = `
@@ -959,15 +1038,20 @@ function initinput() {
         display: flex;
         flex-direction: column;
       }
+      .div {
+        
+      }
       .label{
         font-size:18px;
+        margin: 18px;
       }
+        
       .input{
+        padding: 17px 13px;
+        margin: 18px;
+        border :3px solid black;
+        border-radius 4px
         font-size:18px;
-       padding: 17px 13px;
-       margin-top: 3px;
-       border :3px solid black;
-       border-radius 4px
       }
       `;
             shadow.appendChild(style);
@@ -975,6 +1059,118 @@ function initinput() {
         }
     }
     customElements.define("input-field", TextField);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"knZDI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initSelector", ()=>initSelector);
+function initSelector() {
+    class Selector extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const label = this.getAttribute("label");
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            div.classList.add("root");
+            div.innerHTML = ` 
+      <label class=" label">${label}</label>
+
+        <select class=" select" name="option" >
+        <option value="piedra">Piedra</option>
+        <option value="papel">Papel</option>
+        <option value="tijera">Tijera</option>
+      </select>
+        `;
+            style.innerHTML = `
+        .root{
+            display: flex;
+            flex-direction: column;
+            
+        }
+        .label{
+            font-size:18px
+        }
+
+        .select{
+            font-size:18px;
+            padding: 17px 13px;
+            margin: 18px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 2px solid 
+          }
+        `;
+            shadow.appendChild(style);
+            shadow.appendChild(div);
+        // console.log("este es el buton", div);
+        }
+    }
+    customElements.define("custon-select", Selector);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hZ1Co":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initRetum", ()=>initRetum);
+function initRetum() {
+    class outlined extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const label = this.getAttribute("label");
+            const div = document.createElement("div");
+            const style = document.createElement("style");
+            div.classList.add("root");
+            div.innerHTML = `
+       
+          <div class = "div"> 
+          <a class = "a" href="/">${label}</a>
+        </div>
+       
+        `;
+            style.innerHTML = `
+          .root{
+          display: flex;
+          flex-direction: column;
+        }
+        .label{
+          font-size:18px;
+        }
+        .div{
+          border: 3px solid ;
+         text-align: center;
+         font-size: 22px;
+         padding: 17px 13px;
+         border :3px solid black;
+         border-radius 4px;
+         margin: 18px;
+        }
+        .a{
+          text-decoration: none;
+          text-align: center;
+          color:black;
+          font-size: 18px;
+          font-weight: 500;
+        }
+    
+        `;
+            shadow.appendChild(style);
+            shadow.appendChild(div);
+        }
+    }
+    customElements.define("componet-href", outlined);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iJYvl","h7u1C"], "h7u1C", "parcelRequirec402")
